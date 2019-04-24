@@ -76,10 +76,7 @@ function buscar() {
 }
 
 function borrar() {
-    $("#busqueda").val("");
-    $("#genero").val("");
-    $("#artista").val("");
-    $("#album").val("");
+    $("#busqueda, #genero, #artista, #album").val("");
     $("#resultados").empty();
     if ($("#recientes").children().length == 0) {
         for (const item of JSON.parse(window.sessionStorage.getItem("recientes")).res) {
