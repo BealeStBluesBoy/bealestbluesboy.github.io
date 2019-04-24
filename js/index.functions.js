@@ -67,7 +67,7 @@ function buscar() {
                 Mustache.render(
                     $("#recent").html(),
                     { item: "No se encontraron resultados :("}
-               )
+                )
             );
         }
 
@@ -123,5 +123,5 @@ function compartir(elemento) {
 
     borrar();
 
-    //window.open("share.html");
+    //window.open("html/share.html");
 }
