@@ -26,7 +26,7 @@ function buscar() {
 
         if ($("#genero").val() != "") {
             response.results = $.grep(response.results, function(item) {
-                return (item.primaryGenreName.toLowerCase() == $("#genero").val().toLowerCase());
+                return (item.primaryGenreName.toLowerCase().includes($("#genero").val().toLowerCase()));
             });
         }
 
