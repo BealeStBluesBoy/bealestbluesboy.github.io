@@ -24,6 +24,11 @@ function buscar() {
 
     $.getJSON(searchUrl, function(response) {
 
+        // Descartar canciones que no son reproducibles
+        response.results = $.grep(response.results, function(item) {
+            return (item.previewUrl.includes("/Music/"))
+        });
+
         if ($("#genero").val() != "") {
             response.results = $.grep(response.results, function(item) {
                 return (item.primaryGenreName.toLowerCase().includes($("#genero").val().toLowerCase()));
@@ -111,4 +116,29 @@ function compartir(elemento) {
     borrar();
 
     //window.open("html/share.html");
+}
+
+function playPause(elemento) {
+    $(document).find("audio").trigger("pause");
+    $(document).find("audio").parent().children("img").attr("src", "res/play.svg")
+    if ($(elemento).attr("src") == "res/play.svg") {
+        play(elemento);
+    }
+    else {
+        pause(elemento);
+    }
+}
+
+function play(elemento) {
+    $(elemento).parent().children("audio").trigger("play");
+    $(elemento).attr("src", "res/pause.svg");
+}
+
+function pause(elemento) {
+    $(elemento).parent().children("audio").trigger("pause");
+    $(elemento).attr("src", "res/play.svg");
+}
+
+function end(elemento) {
+    $(elemento).parent().children("img").attr("src", "res/play.svg");
 }

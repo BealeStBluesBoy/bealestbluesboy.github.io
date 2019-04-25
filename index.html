@@ -160,6 +160,10 @@
           <img name="cover" src={{ artworkUrl60 }}>
         </div>
         <div class="col text-truncate">
+          <audio onended="end(this)" onerror="end(this)">
+            <source src={{ previewUrl }} type="audio/mp4"></source>
+          </audio>
+          <img class="img-responsive" onclick="playPause(this)" src="res/play.svg"></img>
           <span name="nombre">{{ trackName }}</span></br>
           <span name="artista">{{ artistName }}</span>
         </div>
