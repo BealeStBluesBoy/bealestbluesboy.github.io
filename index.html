@@ -153,20 +153,22 @@
   </script>
 
   <script id="searchResult" type="x-tmpl-mustache">
-    <li class="list-group-item container" {{ visibilidad }}>
-        <div class="row align-items-center">
-          <div class="col-auto">
-            <img name="cover" src={{ cover }}>
-          </div>
-          <div class="col text-truncate">
-            <span name="nombre">{{ nombre }}</span></br>
-            <span name="artista">{{ artista }}</span>
-          </div>
-          <div class="col-auto">
-            <a href="javascript:void(0)" onclick="compartir(this)"><img src="res/share.svg"></img></a>
-          </div>
+    {{ #results }}
+    <li name="resultado" class="list-group-item container" hidden>
+      <div class="row align-items-center">
+        <div class="col-auto">
+          <img name="cover" src={{ artworkUrl60 }}>
         </div>
+        <div class="col text-truncate">
+          <span name="nombre">{{ trackName }}</span></br>
+          <span name="artista">{{ artistName }}</span>
+        </div>
+        <div class="col-auto">
+          <a href="javascript:void(0)" onclick="compartir(this)"><img src="res/share.svg"></img></a>
+        </div>
+      </div>
     </li>
+    {{ /results }}
   </script>
 
   <script id="moreResults" type="x-tmpl-mustache">

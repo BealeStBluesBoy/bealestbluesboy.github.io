@@ -42,19 +42,11 @@ function buscar() {
             });
         }
 
-        var visibilidad = "";
+        $("#resultados").html(
+            Mustache.render($("#searchResult").html(), response)
+        );
 
-        $("#resultados").empty();
-
-        for (const cancion of response.results) {
-            if (response.results.map((e) => e).indexOf(cancion) > 10) { visibilidad = "hidden" };
-            $("#resultados").append(
-                Mustache.render(
-                    $("#searchResult").html(),
-                    { visibilidad: visibilidad, cover: cancion.artworkUrl60, nombre: cancion.trackName, artista: cancion.artistName }
-                )
-            );
-        }
+        $("li[name='resultado']").slice(0, 10).removeAttr("hidden");
 
         if ($("#resultados").children().length > 10) {
             $("#resultados").append(
@@ -91,8 +83,8 @@ function borrar() {
 }
 
 function verMas() {
-    $("#resultados").children("li[hidden]").slice(0, 10).removeAttr("hidden");
-    if ($("li[hidden]").length == 0) {
+    $("li[name='resultado']").slice(0, 10).removeAttr("hidden");
+    if ($("li[name='resultado']").length == 0) {
         $("#botonVerMas").remove();
     }
 }
