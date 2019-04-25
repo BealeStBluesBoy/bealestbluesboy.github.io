@@ -140,5 +140,6 @@ function pause(elemento) {
 }
 
 function end(elemento) {
+    $(elemento).parent().children("audio").trigger("pause");
     $(elemento).parent().children("img").attr("src", "res/play.svg");
 }
