@@ -81,8 +81,8 @@ function borrar() {
 }
 
 function verMas() {
-    $("li[name='resultado']").slice(0, 10).removeAttr("hidden");
-    if ($("li[name='resultado']").length == 0) {
+    $("li[name='resultado'][hidden]").slice(0, 10).removeAttr("hidden");
+    if ($("li[name='resultado'][hidden]").length == 0) {
         $("#botonVerMas").remove();
     }
 }
