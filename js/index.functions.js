@@ -48,11 +48,14 @@ function buscar() {
 
         $("li[name='resultado']").slice(0, 10).removeAttr("hidden");
 
+        if ($("#resultados").children().length > 0) {
+            guardarReciente($("#busqueda").val());
+        }
+
         if ($("#resultados").children().length > 10) {
             $("#resultados").append(
                 Mustache.render($("#moreResults").html())
             );
-            guardarReciente($("#busqueda").val());
         }
         else if ($("#resultados").children().length == 0) {
             $("#resultados").html(
