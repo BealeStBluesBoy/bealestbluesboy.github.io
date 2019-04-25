@@ -24,9 +24,8 @@ function buscar() {
 
     $.getJSON(searchUrl, function(response) {
 
-        // Descartar canciones que no son reproducibles
         response.results = $.grep(response.results, function(item) {
-            return (item.previewUrl.includes("/Music/"))
+            return item.hasOwnProperty("previewUrl");
         });
 
         if ($("#genero").val() != "") {
@@ -51,12 +50,28 @@ function buscar() {
             Mustache.render($("#searchResult").html(), response)
         );
 
-        $("li[name='resultado']").slice(0, 10).removeAttr("hidden");
+        // Descartar canciones que no reproducibles
+        $("li[name='resultado']").each(function(i, elem) {
+            var url = $(elem).find("source").attr("src");
+            var client = new XMLHttpRequest();
+            client.open("HEAD", url);
+            client.onreadystatechange = function() {
+                if (client.getResponseHeader("Content-Type") == "application/json") {
+                    $(elem).remove();
+                };
+                // Por desgracia no se me ocurre otra manera de limitar exactamente en 10
+                // los primeros resultados
+                $("li[name='resultado']").attr("hidden");
+                $("li[name='resultado']").slice(0, 10).removeAttr("hidden");
 
-        if ($("#resultados").children().length > 0) {
-            guardarReciente($("#busqueda").val());
-        }
+                if ($("#resultados").children().length > 0) {
+                    guardarReciente($("#busqueda").val());
+                }
+            };
+            client.send();
+        });
 
+    }).done(function() {
         if ($("#resultados").children().length > 10) {
             $("#resultados").append(
                 Mustache.render($("#moreResults").html())
@@ -67,9 +82,7 @@ function buscar() {
                 Mustache.render($("#noResult").html())
             );
         }
-
     });
-
 }
 
 function borrar() {
