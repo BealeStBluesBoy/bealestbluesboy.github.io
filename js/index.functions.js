@@ -16,7 +16,7 @@ function buscar() {
     $("#recientes").empty();
 
     // La API de iTunes solo permite hasta 200 resultados
-    var searchUrl = "https://itunes.apple.com/search?media=music&entity=song&limit=200&term=" + $("#busqueda").val();
+    var searchUrl = "https://itunes.apple.com/search?media=music&entity=song&limit=200&term=" + $("#busqueda").val().replace(" ", "+");
 
     $("#resultados").html(
         Mustache.render($("#cargando").html())
