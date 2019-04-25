@@ -55,11 +55,8 @@ function buscar() {
             guardarReciente($("#busqueda").val());
         }
         else if ($("#resultados").children().length == 0) {
-            $("#resultados").append(
-                Mustache.render(
-                    $("#recent").html(),
-                    { item: "No se encontraron resultados :("}
-                )
+            $("#resultados").html(
+                Mustache.render($("#noResult").html())
             );
         }
 
@@ -71,14 +68,12 @@ function borrar() {
     $("#busqueda, #genero, #artista, #album").val("");
     $("#resultados").empty();
     if ($("#recientes").children().length == 0) {
-        for (const item of JSON.parse(window.sessionStorage.getItem("recientes")).res) {
-            $("#recientes").append(
-                Mustache.render(
-                    $("#recent").html(),
-                    { item: item }
-                )
-            );
-        };
+        $("#recientes").html(
+            Mustache.render(
+                $("#recent").html(),
+                JSON.parse(window.sessionStorage.getItem("recientes"))
+            )
+        );
     };
 }
 

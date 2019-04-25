@@ -177,10 +177,18 @@
     </a>
   </script>
 
-  <script id="recent" type="x-tmpl-mustache">
-    <li onclick="llenarBusqueda(this)" class="list-group-item">
-      <span>{{ item }}</span>
+  <script id="noResult" type="x-tmpl-mustache">
+    <li class="list-group-item">
+      No se encontraron resultados :(
     </li>
+  </script>
+
+  <script id="recent" type="x-tmpl-mustache">
+    {{ #res }}
+    <li onclick="llenarBusqueda(this)" class="list-group-item">
+      <span>{{ . }}</span>
+    </li>
+    {{ /res }}
   </script>
 
   <!-- Custom JavaScript for this theme -->
