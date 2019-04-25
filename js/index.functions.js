@@ -24,15 +24,23 @@ function buscar() {
 
     $.getJSON(searchUrl, function(response) {
 
-        response.results = $.grep(response.results, function(item) {
-            return (item.primaryGenreName.toLowerCase().includes($("#genero").val().toLowerCase()));
-        });
-        response.results = $.grep(response.results, function(item) {
-            return (item.artistName.toLowerCase().includes($("#artista").val().toLowerCase()));
-        });
-        response.results = $.grep(response.results, function(item) {
-            return (item.collectionName.toLowerCase().includes($("#album").val().toLowerCase()));
-        });
+        if ($("#genero").val() != "") {
+            response.results = $.grep(response.results, function(item) {
+                return (item.primaryGenreName.toLowerCase().includes($("#genero").val().toLowerCase()));
+            });
+        }
+
+        if ($("#artista").val() != "") {
+            response.results = $.grep(response.results, function(item) {
+                return (item.artistName.toLowerCase().includes($("#artista").val().toLowerCase()));
+            });
+        }
+
+        if ($("#album").val() != "") {
+            response.results = $.grep(response.results, function(item) {
+                return (item.collectionName.toLowerCase().includes($("#album").val().toLowerCase()));
+            });
+        }
 
         $("#resultados").html(
             Mustache.render($("#searchResult").html(), response)
