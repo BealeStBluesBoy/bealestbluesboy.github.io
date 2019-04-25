@@ -120,7 +120,7 @@ function compartir(elemento) {
 
 function playPause(elemento) {
     $(document).find("audio").trigger("pause");
-    $(document).find("audio").parent().children("img").attr("src", "res/play.svg")
+    $(document).find("audio").parent().children("img").not($(elemento)).attr("src", "res/play.svg")
     if ($(elemento).attr("src") == "res/play.svg") {
         play(elemento);
     }
