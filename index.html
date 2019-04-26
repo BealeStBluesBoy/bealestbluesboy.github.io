@@ -153,8 +153,7 @@
   </script>
 
   <script id="searchResult" type="x-tmpl-mustache">
-    {{ #results }}
-    <li name="resultado" class="list-group-item container" hidden>
+    <li name="resultado" class="list-group-item container"  {{ #hide }}hidden{{ /hide }}>
       <div class="row align-items-center">
         <div class="col-auto">
           <img name="cover" src={{ artworkUrl60 }}>
@@ -172,7 +171,6 @@
         </div>
       </div>
     </li>
-    {{ /results }}
   </script>
 
   <script id="moreResults" type="x-tmpl-mustache">
@@ -182,7 +180,7 @@
   </script>
 
   <script id="noResult" type="x-tmpl-mustache">
-    <li class="list-group-item">
+    <li id="sinResultados" class="list-group-item">
       No se encontraron resultados :(
     </li>
   </script>

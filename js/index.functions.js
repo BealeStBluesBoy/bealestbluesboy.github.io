@@ -24,64 +24,44 @@ function buscar() {
 
     $.getJSON(searchUrl, function(response) {
 
-        response.results = $.grep(response.results, function(item) {
-            return item.hasOwnProperty("previewUrl");
-        });
+        $("#resultados").empty();
 
-        if ($("#genero").val() != "") {
-            response.results = $.grep(response.results, function(item) {
-                return (item.primaryGenreName.toLowerCase().includes($("#genero").val().toLowerCase()));
-            });
-        }
+        if (response.resultCount == 0) {
+            $("#resultados").html(Mustache.render($("#noResult").html()));
+            return;
+        };
 
-        if ($("#artista").val() != "") {
-            response.results = $.grep(response.results, function(item) {
-                return (item.artistName.toLowerCase().includes($("#artista").val().toLowerCase()));
-            });
-        }
+        $.each(response.results, function(i, elem) {
+            if  (elem.hasOwnProperty("previewUrl") &&
+                (elem.primaryGenreName.toLowerCase().indexOf($("#genero").val().toLowerCase()) != -1) &&
+                (elem.artistName.toLowerCase().indexOf($("#artista").val().toLowerCase()) != -1) &&
+                (elem.collectionName.toLowerCase().indexOf($("#album").val().toLowerCase()) != -1)) {
+                $.ajax(elem.previewUrl, {
+                    method: "HEAD",
+                    success: function(data, responseText, jqXHR) {
+                        if (jqXHR.getResponseHeader("Content-Type") != "application/json") {
+                            guardarReciente($("#busqueda").val());
 
-        if ($("#album").val() != "") {
-            response.results = $.grep(response.results, function(item) {
-                return (item.collectionName.toLowerCase().includes($("#album").val().toLowerCase()));
-            });
-        }
+                            if ($("li[name='resultado']").not("li[hidden]").length >= 10) {
+                                elem.hide = true;
+                            }
+                            else {
+                                elem.hide = false;
+                            }
 
-        $("#resultados").html(
-            Mustache.render($("#searchResult").html(), response)
-        );
-
-        // Descartar canciones que no reproducibles
-        $("li[name='resultado']").each(function(i, elem) {
-            var url = $(elem).find("source").attr("src");
-            var client = new XMLHttpRequest();
-            client.open("HEAD", url);
-            client.onreadystatechange = function() {
-                if (client.getResponseHeader("Content-Type") == "application/json") {
-                    $(elem).remove();
-                };
-                // Por desgracia no se me ocurre otra manera de limitar exactamente en 10
-                // los primeros resultados
-                $("li[name='resultado']").attr("hidden");
-                $("li[name='resultado']").slice(0, 10).removeAttr("hidden");
-
-                if ($("#resultados").children().length > 0) {
-                    guardarReciente($("#busqueda").val());
-                }
+                            $("#resultados").append(
+                                Mustache.render($("#searchResult").html(), elem)
+                            );
+                            
+                            $("#botonVerMas").remove();
+                            if ($("li[name='resultado'][hidden]").length > 0) {
+                                $("#resultados").append(Mustache.render($("#moreResults").html()));
+                            };
+                        };
+                    }
+                });
             };
-            client.send();
         });
-
-    }).done(function() {
-        if ($("#resultados").children().length > 10) {
-            $("#resultados").append(
-                Mustache.render($("#moreResults").html())
-            );
-        }
-        else if ($("#resultados").children().length == 0) {
-            $("#resultados").html(
-                Mustache.render($("#noResult").html())
-            );
-        }
     });
 }
 
