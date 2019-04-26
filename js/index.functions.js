@@ -24,12 +24,8 @@ function buscar() {
 
     $.getJSON(searchUrl, function(response) {
 
-        $("#resultados").empty();
-
-        if (response.resultCount == 0) {
-            $("#resultados").html(Mustache.render($("#noResult").html()));
-            return;
-        };
+        $("#resultados").html(Mustache.render($("#noResult").html()));
+        if (response.resultCount == 0) { return; };
 
         $.each(response.results, function(i, elem) {
             if  (elem.hasOwnProperty("previewUrl") &&
@@ -40,6 +36,8 @@ function buscar() {
                     method: "HEAD",
                     success: function(data, responseText, jqXHR) {
                         if (jqXHR.getResponseHeader("Content-Type") != "application/json") {
+                            $("#sinResultados").remove();
+
                             guardarReciente($("#busqueda").val());
 
                             if ($("li[name='resultado']").not("li[hidden]").length >= 10) {
