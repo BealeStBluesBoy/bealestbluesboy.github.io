@@ -153,10 +153,10 @@
   </script>
 
   <script id="searchResult" type="x-tmpl-mustache">
-    <li name="resultado" class="list-group-item container"  {{ #hide }}hidden{{ /hide }}>
+    <li name="resultado" class="list-group-item container p-2"  {{ #hide }}hidden{{ /hide }}>
       <div class="row align-items-center">
-        <div class="col-auto">
-          <img name="cover" src={{ artworkUrl60 }}>
+        <div class="col-auto pr-2">
+          <img class="rounded" name="cover" src={{ artworkUrl60 }}>
         </div>
         <div class="col text-truncate px-0">
           <audio onended="end(this)" onerror="end(this)" onstalled="end(this)" preload="none">
@@ -166,7 +166,7 @@
           <span name="nombre">{{ trackName }}</span></br>
           <span name="artista">{{ artistName }}</span>
         </div>
-        <div class="col-auto">
+        <div class="col-auto pl-2">
           <a href="javascript:void(0)" onclick="compartir(this)"><img src="res/share.svg"></img></a>
         </div>
       </div>
