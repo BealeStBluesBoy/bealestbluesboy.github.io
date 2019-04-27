@@ -162,7 +162,7 @@
           <audio onended="end(this)" onerror="end(this)" onstalled="end(this)" preload="none">
             <source src={{ previewUrl }} type="audio/mp4"></source>
           </audio>
-          <img onclick="playPause(this)" src="res/play.svg"></img>
+          <img name="audCtrl" onclick="playPause(this)" src="res/play.svg"></img>
           <span name="nombre">{{ trackName }}</span></br>
           <span name="artista">{{ artistName }}</span>
         </div>

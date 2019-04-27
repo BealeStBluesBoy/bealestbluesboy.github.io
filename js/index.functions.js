@@ -96,7 +96,7 @@ function llenarBusqueda(busqueda) {
 }
 
 function compartir(elemento) {
-    var elemento = $(elemento).parent().parent().parent();
+    var elemento = $(elemento).closest("li[name='resultado']");
     var imgUrl = elemento.find("img[name='cover']").attr("src");
     var nombre = elemento.find("span[name='nombre']").text();
     var artista = elemento.find("span[name='artista']").text();
@@ -109,27 +109,19 @@ function compartir(elemento) {
 }
 
 function playPause(elemento) {
-    $(document).find("audio").trigger("pause");
-    $(document).find("audio").parent().children("img").not($(elemento)).attr("src", "res/play.svg")
+    $("audio").trigger("pause");
+    $("img[name='audCtrl']").not($(elemento)).attr("src", "res/play.svg");
     if ($(elemento).attr("src") == "res/play.svg") {
-        play(elemento);
+        $(elemento).closest("li[name='resultado']").find("audio").trigger("play");
+        $(elemento).attr("src", "res/pause.svg");
     }
     else {
-        pause(elemento);
+        $(elemento).closest("li[name='resultado']").find("audio").trigger("pause");
+        $(elemento).attr("src", "res/play.svg");
     }
-}
-
-function play(elemento) {
-    $(elemento).parent().children("audio").trigger("play");
-    $(elemento).attr("src", "res/pause.svg");
-}
-
-function pause(elemento) {
-    $(elemento).parent().children("audio").trigger("pause");
-    $(elemento).attr("src", "res/play.svg");
 }
 
 function end(elemento) {
-    $(elemento).parent().children("audio").trigger("pause");
-    $(elemento).parent().children("img").attr("src", "res/play.svg");
+    $(elemento).trigger("pause");
+    $(elemento).closest("li[name='resultado']").find("img[name='audCtrl']").attr("src", "res/play.svg");
 }
