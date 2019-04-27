@@ -1,6 +1,21 @@
-.album-art {
+.album-art-container {
     height: 60px;
     width: 60px;
-    align-items: center;
-    display: flex;
+    position: relative;
+}
+
+.abs-center {
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+.album-art {
+    z-index: 1;    
+}
+
+.play-pause-btn {
+    z-index: 2;
 }

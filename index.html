@@ -159,15 +159,15 @@
     <li name="resultado" class="list-group-item container p-2"  {{ #hide }}hidden{{ /hide }}>
       <div class="row align-items-center">
         <div class="col-auto pr-2">
-          <div class="album-art">
-            <img class="rounded" name="cover" src={{ artworkUrl60 }}>
+          <div class="album-art-container">
+            <img class="rounded abs-center album-art" name="cover" src={{ artworkUrl60 }}>
+            <img class="abs-center play-pause-btn" name="audCtrl" onclick="playPause(this)" src="res/play.svg"></img>
           </div>
         </div>
         <div class="col text-truncate px-0">
           <audio onended="end(this)" onerror="end(this)" onstalled="end(this)" preload="none">
             <source src={{ previewUrl }} type="audio/mp4"></source>
           </audio>
-          <img name="audCtrl" onclick="playPause(this)" src="res/play.svg"></img>
           <span name="nombre">{{ trackName }}</span></br>
           <span name="artista">{{ artistName }}</span>
         </div>
