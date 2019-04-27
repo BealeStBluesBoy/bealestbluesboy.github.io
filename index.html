@@ -39,6 +39,9 @@
 
   <!-- Funciones especificas de la pagina -->
   <script src="js/index.functions.js"></script>
+
+  <!-- Estilo especifico de la pagina -->
+  <link rel="stylesheet" href="css/index.css">
 </head>
 
 <body id="page-top">
@@ -156,7 +159,9 @@
     <li name="resultado" class="list-group-item container p-2"  {{ #hide }}hidden{{ /hide }}>
       <div class="row align-items-center">
         <div class="col-auto pr-2">
-          <img class="rounded" name="cover" src={{ artworkUrl60 }}>
+          <div class="album-art">
+            <img class="rounded" name="cover" src={{ artworkUrl60 }}>
+          </div>
         </div>
         <div class="col text-truncate px-0">
           <audio onended="end(this)" onerror="end(this)" onstalled="end(this)" preload="none">

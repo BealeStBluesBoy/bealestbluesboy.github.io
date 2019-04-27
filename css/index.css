@@ -1,0 +1,6 @@
+.album-art {
+    height: 60px;
+    width: 60px;
+    align-items: center;
+    display: flex;
+}
