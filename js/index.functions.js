@@ -95,17 +95,10 @@ function llenarBusqueda(busqueda) {
     $("#busqueda").val($(busqueda).children().text());
 }
 
-function compartir(elemento) {
-    var elemento = $(elemento).closest("li[name='resultado']");
-    var imgUrl = elemento.find("img[name='cover']").attr("src");
-    var nombre = elemento.find("span[name='nombre']").text();
-    var artista = elemento.find("span[name='artista']").text();
-
-    //window.localStorage.setItem("compartido", "{ \"datos\": " + JSON.stringify([ imgUrl, nombre, artista ]) + " }")
-
+function compartir(res) {
+    window.sessionStorage.setItem("compartido", $(res).closest("li[name='resultado'").attr("id"));
     borrar();
-
-    //window.open("html/share.html");
+    window.open("html/share.html");
 }
 
 function playPause(elemento) {
