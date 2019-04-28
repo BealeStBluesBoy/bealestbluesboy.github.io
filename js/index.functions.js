@@ -22,9 +22,10 @@ function buscar() {
     );
 
     $.getJSON(searchUrl, function(response) {
-
-        $("#resultados").html(Mustache.render($("#noResult").html()));
-        if (response.resultCount == 0) { return; };
+        if (response.resultCount == 0) { 
+            $("#resultados").html(Mustache.render($("#noResult").html()));
+            return;
+        };
 
         $.each(response.results, function(i, elem) {
             if  (elem.hasOwnProperty("previewUrl") &&
@@ -35,28 +36,30 @@ function buscar() {
                     method: "HEAD",
                     success: function(data, responseText, jqXHR) {
                         if (jqXHR.getResponseHeader("Content-Type") != "application/json") {
-                            $("#sinResultados").remove();
-
                             guardarReciente($("#busqueda").val());
-
                             if ($("li[name='resultado']").not("li[hidden]").length >= 10) {
                                 elem.hide = true;
                             }
                             else {
                                 elem.hide = false;
-                            }
-
+                            };
+                            $("#indicadorCargando").remove();
                             $("#resultados").append(
                                 Mustache.render($("#searchResult").html(), elem)
                             );
-                            
                             $("#botonVerMas").remove();
                             if ($("li[name='resultado'][hidden]").length > 0) {
                                 $("#resultados").append(Mustache.render($("#moreResults").html()));
                             };
                         };
+                        if ($("#resultados").children("li[name='resultado']").length == 0) {
+                            $("#resultados").html(Mustache.render($("#noResult").html()));
+                        };
                     }
                 });
+            }
+            else if ($("#resultados").children("li[name='resultado']").length == 0) {
+                $("#resultados").html(Mustache.render($("#noResult").html()));
             };
         });
     });
