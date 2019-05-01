@@ -1,7 +1,7 @@
 $(document).ready(function () {
     window.sessionStorage.setItem("recientes", "{ \"res\": [] }");
 
-    navigator.geolocation.getCurrentPosition(armarMapa);
+    navigator.geolocation.getCurrentPosition(armarMapa, armarMapaEstatico);
 
     var targetNode = document.getElementById("mapa");
     var config = { childList: true };
@@ -19,15 +19,39 @@ $(document).keyup(function(e) {
     };
 });
 
+$(window).resize(function() {
+    if (myLatLng != undefined) {
+        ajustarMapa();
+    }
+});
+
+var myLatLng;
+var catedral;
+var map;
+
+function armarMapaEstatico() {
+    catedral = { lat: -34.922440, lng: -57.955711 };
+    var mapProp = {
+        center: catedral,
+        zoom: 15,
+        disableDefaultUI: true,
+    };
+    map = new google.maps.Map(document.getElementById("mapa"), mapProp);
+    var markerCat = new google.maps.Marker({
+        position: catedral,
+        map: map,
+    });
+}
+
 function armarMapa(pos) {
-    var myLatLng = { lat: pos.coords.latitude, lng: pos.coords.longitude };
-    var catedral = { lat: -34.922440, lng: -57.955711 };
+    myLatLng = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+    catedral = { lat: -34.922440, lng: -57.955711 };
     var mapProp = {
         center: { lat: (myLatLng.lat + catedral.lat)/2, lng: (myLatLng.lng + catedral.lng)/2 },
         zoom: 1,
         disableDefaultUI: true,
     };
-    var map = new google.maps.Map(document.getElementById("mapa"), mapProp);
+    map = new google.maps.Map(document.getElementById("mapa"), mapProp);
     var markerCat = new google.maps.Marker({
         position: catedral,
         label: "B",
@@ -38,6 +62,11 @@ function armarMapa(pos) {
         label: "A",
         map: map,
     });
+
+    ajustarMapa();
+}
+
+function ajustarMapa() {
     var sWestern = { lat: 0, lng: 0 };
     var nEastern = { lat: 0, lng: 0 };
 
