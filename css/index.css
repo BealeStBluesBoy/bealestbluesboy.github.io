@@ -19,3 +19,7 @@
 .play-pause-btn {
     z-index: 2;
 }
+
+#mapa {
+    height: 50vh;
+}
