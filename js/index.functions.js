@@ -120,12 +120,7 @@ function buscar() {
                     success: function(data, responseText, jqXHR) {
                         if (jqXHR.getResponseHeader("Content-Type") != "application/json") {
                             guardarReciente($("#busqueda").val());
-                            if ($("li[name='resultado']").not("li[hidden]").length >= 10) {
-                                elem.hide = true;
-                            }
-                            else {
-                                elem.hide = false;
-                            };
+                            elem.hide = $("li[name='resultado']:not(li[hidden])").length >= 10;
                             $("#indicadorCargando").remove();
                             $("#resultados").append(
                                 Mustache.render($("#searchResult").html(), elem)
@@ -135,13 +130,13 @@ function buscar() {
                                 $("#resultados").append(Mustache.render($("#moreResults").html()));
                             };
                         };
-                        if ($("#resultados").children("li[name='resultado']").length == 0) {
+                        if ($("li[name='resultado']").length == 0) {
                             $("#resultados").html(Mustache.render($("#noResult").html()));
                         };
                     }
                 });
             }
-            else if ($("#resultados").children("li[name='resultado']").length == 0) {
+            else if ($("li[name='resultado']").length == 0) {
                 $("#resultados").html(Mustache.render($("#noResult").html()));
             };
         });
