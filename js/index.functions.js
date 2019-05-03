@@ -167,9 +167,9 @@ function guardarReciente(busqueda) {
     listaRecientes = JSON.parse(window.sessionStorage.getItem("recientes"));
     if (!listaRecientes.res.includes(busqueda)) {
         listaRecientes.res.unshift(busqueda);
+        listaRecientes.res = listaRecientes.res.slice(0, 5);
+        window.sessionStorage.setItem("recientes", JSON.stringify(listaRecientes));
     }
-    listaRecientes.res = listaRecientes.res.slice(0, 5);
-    window.sessionStorage.setItem("recientes", JSON.stringify(listaRecientes));
 }
 
 function llenarBusqueda(busqueda) {
