@@ -110,34 +110,43 @@ function buscar() {
             return;
         };
 
+        var genero = $("#genero").val().toLowerCase();
+        var artista = $("#artista").val().toLowerCase();
+        var album = $("#album").val().toLowerCase();
+        var busqueda = $("#busqueda").val().toLowerCase();
+        
+        var resultados = $("#resultados");
+        var searchResult = $("#searchResult").html();
+        var moreResults = $("#moreResults").html();
+
         $.each(response.results, function(i, elem) {
             if  (elem.hasOwnProperty("previewUrl") &&
-                (elem.primaryGenreName.toLowerCase().indexOf($("#genero").val().toLowerCase()) != -1) &&
-                (elem.artistName.toLowerCase().indexOf($("#artista").val().toLowerCase()) != -1) &&
-                (elem.collectionName.toLowerCase().indexOf($("#album").val().toLowerCase()) != -1)) {
+                (elem.primaryGenreName.toLowerCase().indexOf(genero) != -1) &&
+                (elem.artistName.toLowerCase().indexOf(artista) != -1) &&
+                (elem.collectionName.toLowerCase().indexOf(album) != -1)) {
                 $.ajax(elem.previewUrl, {
                     method: "HEAD",
                     success: function(data, responseText, jqXHR) {
                         if (jqXHR.getResponseHeader("Content-Type") != "application/json") {
-                            guardarReciente($("#busqueda").val());
+                            guardarReciente(busqueda);
                             elem.hide = $("li[name='resultado']:not(li[hidden])").length >= 10;
                             $("#indicadorCargando").remove();
-                            $("#resultados").append(
-                                Mustache.render($("#searchResult").html(), elem)
+                            resultados.append(
+                                Mustache.render(searchResult, elem)
                             );
                             $("#botonVerMas").remove();
                             if ($("li[name='resultado'][hidden]").length > 0) {
-                                $("#resultados").append(Mustache.render($("#moreResults").html()));
+                                resultados.append(moreResults);
                             };
                         };
                         if ($("li[name='resultado']").length == 0) {
-                            $("#resultados").html(Mustache.render($("#noResult").html()));
+                            resultados.html(Mustache.render($("#noResult").html()));
                         };
                     }
                 });
             }
             else if ($("li[name='resultado']").length == 0) {
-                $("#resultados").html(Mustache.render($("#noResult").html()));
+                resultados.html(Mustache.render($("#noResult").html()));
             };
         });
     });
