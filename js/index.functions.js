@@ -3,13 +3,10 @@ $(document).ready(function () {
 
     navigator.geolocation.getCurrentPosition(armarMapa, armarMapaEstatico);
 
-    var targetNode = document.getElementById("mapa");
-    var config = { childList: true };
-    var callback = function() {
-        $("#mapa").find("div[class='gm-style']").parent().siblings().hide();
-    };
-    var observer = new MutationObserver(callback);
-    observer.observe(targetNode, config);
+    var observer = new MutationObserver(
+        () => $("#mapa").find("div[class='gm-style']").parent().siblings().hide()
+    );
+    observer.observe(document.getElementById("mapa"), { childList: true });
 });
 
 $(document).keyup(function(e) {
