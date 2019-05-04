@@ -107,7 +107,7 @@ function buscar() {
         var searchResult = $("#searchResult").html();
         var moreResults = $("#moreResults").html();
 
-        $.each(response.results, function(i, elem) {
+        for (const elem of response.results) {
             if  (elem.hasOwnProperty("previewUrl") &&
                 (elem.primaryGenreName.toLowerCase().indexOf(genero) != -1) &&
                 (elem.artistName.toLowerCase().indexOf(artista) != -1) &&
@@ -136,7 +136,7 @@ function buscar() {
             else if ($("li[name='resultado']").length == 0) {
                 resultados.html(Mustache.render($("#noResult").html()));
             };
-        });
+        };
     });
 }
 
