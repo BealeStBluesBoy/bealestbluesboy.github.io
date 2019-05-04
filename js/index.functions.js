@@ -70,23 +70,11 @@ function ajustarMapa() {
     var sWestern = { lat: 0, lng: 0 };
     var nEastern = { lat: 0, lng: 0 };
 
-    if (myLatLng.lat < catedral.lat) {
-        nEastern.lat = catedral.lat;
-        sWestern.lat = myLatLng.lat;
-    }
-    else {
-        nEastern.lat = myLatLng.lat;
-        sWestern.lat = catedral.lat;
-    }
+    nEastern.lat = myLatLng.lat < catedral.lat ? catedral.lat : myLatLng.lat;
+    nEastern.lng = myLatLng.lng < catedral.lng ? catedral.lng : myLatLng.lng;
 
-    if (myLatLng.lng < catedral.lng) {
-        nEastern.lng = catedral.lng;
-        sWestern.lng = myLatLng.lng;
-    }
-    else {
-        nEastern.lng = myLatLng.lng;
-        sWestern.lng = catedral.lng;
-    }
+    sWestern.lat = myLatLng.lat > catedral.lat ? catedral.lat : myLatLng.lat;
+    sWestern.lng = myLatLng.lng > catedral.lng ? catedral.lng : myLatLng.lng;
 
     var bounds = new google.maps.LatLngBounds(sWestern, nEastern);
     map.fitBounds(bounds);
