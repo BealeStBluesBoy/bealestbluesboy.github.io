@@ -120,6 +120,7 @@ function buscar() {
                                 Mustache.render(searchResult, elem)
                             );
                             $("#botonVerMas").remove();
+                            $("#sinResultados").remove();
                             if ($("li[name='resultado'][hidden]").length > 0) {
                                 resultados.append(moreResults);
                             };
