@@ -84,6 +84,7 @@ function buscar() {
     $("#recientes").empty();
 
     var searchUrl = "https://itunes.apple.com/search?media=music&entity=song&limit=100&term=" + $("#busqueda").val().replace(" ", "+");
+    searchUrl += "&callback=?";
 
     $("#resultados").html(
         Mustache.render($("#cargando").html())

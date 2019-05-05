@@ -1,5 +1,7 @@
 function prepararForma() {
     var searchUrl = "https://itunes.apple.com/lookup?id=" + window.sessionStorage.getItem("compartido");
+    searchUrl += "&callback=?";
+
     $.getJSON(searchUrl, function(response) {
         $("#resultado").append(
             Mustache.render($("#cancionTmpl").html(), response.results[0])
