@@ -175,6 +175,7 @@ function llenarBusqueda(busqueda) {
 function compartir(res) {
     window.sessionStorage.setItem("compartido", $(res).closest("li[name='resultado'").attr("id"));
     borrar();
+    document.getElementById("services").scrollIntoView();
     window.open("share.html");
 }
 
