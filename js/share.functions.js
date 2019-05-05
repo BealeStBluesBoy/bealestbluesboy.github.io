@@ -16,6 +16,10 @@ function enviar() {
 
 Te recomiendo esta cancion: "${ $("#nombre").text() }", de ${ $("#artista").text() }.
 
+Para mas informacion accede a:
+
+${ $("#cancion").attr("data-link") }
+
 Saludos!
 `
     );
