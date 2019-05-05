@@ -36,7 +36,7 @@
   <link rel="stylesheet" href="css/index.css">
 </head>
 
-<body class="vh-100">
+<body class="vh-100" onload="prepararForma()">
 
   <!-- Navigation -->
   <nav class="navbar navbar-dark bg-dark fixed-top">
@@ -71,5 +71,20 @@
     </div>
   </section>
 
+  <script id="cancionTmpl" type="x-tmpl-mustache">
+    <li id="cancion" class="list-group-item container p-2" >
+      <div class="row align-items-center">
+        <div class="col-auto pr-2">
+          <div class="album-art-container">
+            <img class="rounded abs-center album-art" src={{ artworkUrl60 }}>
+          </div>
+        </div>
+        <div class="col text-truncate px-0">
+          <span id="nombre">{{ trackName }}</span></br>
+          <span id="artista">{{ artistName }}</span>
+        </div>
+      </div>
+    </li>
+  </script>
 </body>
 </html>
