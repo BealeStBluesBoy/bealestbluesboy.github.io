@@ -24,4 +24,5 @@ Saludos!
         );
         mail.click();
     }
+    return false; // Evita que la pagina recargue
 }
