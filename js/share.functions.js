@@ -27,3 +27,12 @@ Saludos!
 
     return false; // Evita que la pagina recargue
 }
+
+function tweet() {
+    var tw = document.createElement("a");
+    tw.href = "https://twitter.com/intent/tweet?"
+    tw.href += "text=" +
+    encodeURIComponent("Les recomiendo escuchar \"" + $("#nombre").text() + "\", de " + $("#artista").text()) +
+    "%0A&url=" + encodeURIComponent($("#cancion").attr("data-link"));
+    tw.click();
+}
