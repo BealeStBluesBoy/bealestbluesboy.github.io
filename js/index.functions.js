@@ -174,7 +174,7 @@ function llenarBusqueda(busqueda) {
 function compartir(res) {
     window.sessionStorage.setItem("compartido", $(res).closest("li[name='resultado'").attr("id"));
     borrar();
-    window.open("html/share.html");
+    window.open("share.html");
 }
 
 function playPause(elemento) {
