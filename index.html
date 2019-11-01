@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <title>Gustavo Cargnelutti</title>
+        <title>Resumen</title>
 
         <script
             src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -26,12 +26,12 @@
     </head>
 
     <body>
-        <header>
-            <div class="container">
-                <h1>
-                    Cargnelutti Gustavo
+        <header class="py-5" style="background-color: rgb(0, 50, 90)">
+            <div class="container text-white">
+                <h1 class="display-4">
+                    Cargnelutti, Gustavo Alejandro
                 </h1>
-                <p>
+                <p class="lead">
                     Trato de mantener siempre una comunicación eficiente.<br>
                     Busco la solución más adecuada y cercana a lo óptimo
                     para los desafíos que se me presentan.
@@ -39,59 +39,77 @@
             </div>
         </header>
 
-        <section>
-            <div class="container">
-                <h2>Educación</h2>
-                <ul>
-                    <li>UTN FRLP - Ingeniería en Sistemas de Información (3 años)</li>
-                </ul>
-            </div>
-        </section>
+        <div class="py-5">
+            <section>
+                <div class="container">
+                    <h2>Educación</h2>
+                    <div class="card mb-3">
+                        <div class="row no-gutters">
+                            <div class="card-body">
+                                <h5 class="card-title">UTN FRLP</h5>
+                                <p class="card-text">
+                                    Ingeniería en Sistemas de Información<br>
+                                    <small class="text-muted">Hasta 3er año inclusive</small>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-        <section>
-            <div class="container">
-                <h2>Conocimientos</h2>
-                <ul>
-                    <li>C#</li>
-                    <li>ECMAScript</li>
-                    <li>Git</li>
-                    <li>SQL</li>
-                    <li>Bash</li>
-                    <li>Soporte técnico</li>
-                </ul>
-            </div>
-        </section>
+            <section>
+                <div class="container">
+                    <h2>Conocimientos</h2>
+                    <ul>
+                        <li>C#</li>
+                        <li>ECMAScript</li>
+                        <li>Git</li>
+                        <li>SQL</li>
+                        <li>Bash</li>
+                        <li>Soporte técnico</li>
+                    </ul>
+                </div>
+            </section>
 
-        <section>
-            <div class="container">
-                <h2>Idiomas</h2>
-                <ul>
-                    <li>Español (nativo)</li>
-                    <li>Inglés (intermedio)</li>
-                </ul>
-            </div>
-        </section>
+            <section>
+                <div class="container">
+                    <h2>Idiomas</h2>
+                    <ul>
+                        <li>Español (nativo)</li>
+                        <li>Inglés (intermedio)</li>
+                    </ul>
+                </div>
+            </section>
 
-        <section>
-            <div class="container">
-                <h2>Actividades adicionales</h2>
-                <p>
-                    Soy muy aficionado, aunque siempre buscando
-                    lo óptimo, a la música, el dibujo, la escritura
-                    y la fotografía. Considero mi sentido estético más que
-                    aceptable.
-                </p>
-            </div>
-        </section>
+            <section>
+                <div class="container">
+                    <h2>Actividades adicionales</h2>
+                    <p>
+                        Soy muy aficionado, aunque siempre buscando
+                        lo óptimo, a la música, el dibujo, la escritura
+                        y la fotografía. Considero mi sentido estético más que
+                        aceptable.
+                    </p>
+                </div>
+            </section>
 
-        <section>
-            <div class="container">
-                <h2>Sitios</h2>
-                <ul>
-                    <li><a href="https://www.linkedin.com/in/bealestbluesboy" target="_blank">LinkedIn</a></li>
-                    <li><a href="https://github.com/BealeStBluesBoy" target="_blank">GitHub</a></li>
-                </ul>
-            </div>
-        </section>
+            <section>
+                <div class="container">
+                    <h2>Sitios</h2>
+                    <ul>
+                        <li><a href="https://www.linkedin.com/in/bealestbluesboy" target="_blank">LinkedIn</a></li>
+                        <li><a href="https://github.com/BealeStBluesBoy" target="_blank">GitHub</a></li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <footer class="py-5 bg-dark text-light text-center">
+            &copy; <span id="year"></span>
+        </footer>
+
+        <script>
+            $("#year").text(new Date().getFullYear());
+        </script>
     </body>
 </html>
